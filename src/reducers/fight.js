@@ -17,9 +17,9 @@ export const capacities = {
 }
 
 const players = [
-    { name: "John", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 1 },
-    { name: "Jack", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 2 },
-    { name: "Jessy", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 3 },
+    { name: "John", pv: 10, pvMax: 100, mana: 30, manaMax: 30, id: 1 },
+    { name: "Jack", pv: 10, pvMax: 100, mana: 30, manaMax: 30, id: 2 },
+    { name: "Jessy", pv: 10, pvMax: 100, mana: 30, manaMax: 30, id: 3 },
     { name: "Jenny", pv: 100, pvMax: 100, mana: 30, manaMax: 30, id: 4 }
 ]
 
@@ -98,15 +98,17 @@ const fightSlice = createSlice({
 
             if (turn.length === players.length) {
                 playersAlives = players.filter(player => player.pv > 0)
-                index = getRandomInt(0, playersAlives.length - 1)
-                currentPlayer = playersAlives[index]
-                damage = getRandomInt(0, 15)
+                if (playersAlives.length > 0) {
+                    index = getRandomInt(0, playersAlives.length - 1)
+                    currentPlayer = playersAlives[index]
+                    damage = getRandomInt(0, 15)
 
-                currentPlayer.pv -= damage
+                    currentPlayer.pv -= damage
 
-                if (currentPlayer.pv <= 0) {
-                    currentPlayer.pv = 0
-                    state.deads = [...state.deads, currentPlayer.id]
+                    if (currentPlayer.pv <= 0) {
+                        currentPlayer.pv = 0
+                        state.deads = [...state.deads, currentPlayer.id]
+                    }
                 }
 
                 state.gameTurn = players.filter(player => player.pv <= 0)
