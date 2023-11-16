@@ -5,7 +5,7 @@ const ProgressBar = (props) => {
 
 
     return (
-        <div className="progress md-progress" >
+        <div className="progress md-progress my-2" >
             <div className="progress-bar"
                 style={{ width: (props.pv * 100 / props.pvMax) + "%" }}
                 aria-valuenow={props.pv}
